@@ -4,10 +4,26 @@ const botaoAnteriorEl = document.querySelector('#anterior');
 
 const imagemSlideEl = document.querySelector('#slide');
 
-botaoProximoEl.addEventListener('click', trocaSlide);
-botaoAnteriorEl.addEventListener('click', trocaSlide);
+botaoProximoEl.addEventListener('click', imagemPosterior);
+botaoAnteriorEl.addEventListener('click', imagemAnterior);
 
 let imagemAtual = 0;
+
+function imagemPosterior(){
+  
+  imagemAtual++;  
+  imagemAtual = verificaIndice(imagemAtual);
+
+  trocaSlide();
+}
+
+function imagemAnterior(){
+  
+  imagemAtual--;  
+  imagemAtual = verificaIndice(imagemAtual);
+
+  trocaSlide();
+}
 
 function verificaIndice(indice){
 
@@ -22,18 +38,7 @@ function verificaIndice(indice){
   }
 }
 
-function trocaSlide(e){ 
-
-  const el = e.currentTarget;
-
-  if(el.id === 'proximo'){    
-    imagemAtual++;
-    imagemAtual = verificaIndice(imagemAtual);
-  }
-  else if(el.id === 'anterior'){
-    imagemAtual--;
-    imagemAtual = verificaIndice(imagemAtual);
-  }
+function trocaSlide(){ 
 
   imagemSlideEl.src = servidorDasImagens + '/' + imagens[imagemAtual].arquivo;
   imagemSlideEl.alt = imagens[imagemAtual].descricao;    
